@@ -69,7 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                <li class="nav-item">
                  <router-link to="/dashboard" class="nav-link">
-                   <i class="nav-icon fas fa-tachometer-alt"></i>
+                   <i class="nav-icon fas fa-tachometer-alt blue"></i>
                    <p>
                      Dashboard
                    </p>
@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-cog blue"></i>
               <p>
                 Settings
                 <i class="right fas fa-angle-left"></i>
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user blue"></i>
               <p>
                 Profile
               </p>
@@ -111,12 +111,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-power-off"></i>
-              <p>
-                Logout
+
+            <a class="nav-link" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                <i class="nav-icon fas fa-power-off blue"></i>
+                <p>
+                {{ __('Logout') }}
               </p>
             </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
           </li>
 
         </ul>
