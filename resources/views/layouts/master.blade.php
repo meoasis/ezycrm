@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>AdminLTE 3 | Starter</title>
+  <title>Ezy CRM</title>
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/dashboard" class="brand-link">
       <img src="./img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">EzyPromotion</span>
@@ -76,6 +76,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                  </router-link>
                </li>
 
+               <li class="nav-item">
+                 <router-link to="/activities" class="nav-link">
+                   <i class="nav-icon fas fa-sync-alt blue"></i>
+                   <p>
+                     Activities
+                   </p>
+                 </router-link>
+               </li>
+
+               <li class="nav-item">
+                 <router-link to="/myleave" class="nav-link">
+                   <i class="nav-icon fas fa-sign-out-alt blue"></i>
+                   <p>
+                     My Leave
+                   </p>
+                 </router-link>
+               </li>
+
+               <li class="nav-item">
+                 <router-link to="/appliedleave" class="nav-link">
+                   <i class="nav-icon fas fa-sign-out-alt blue"></i>
+                   <p>
+                     Applied Leave
+                   </p>
+                 </router-link>
+               </li>
+
+               <li class="nav-item">
+                 <router-link to="/tickets" class="nav-link">
+                   <i class="nav-icon fas fa-ticket-alt blue"></i>
+                   <p>
+                     Tickets
+                   </p>
+                 </router-link>
+               </li>
+
+               <li class="nav-item">
+                 <router-link to="/mytickets" class="nav-link">
+                   <i class="nav-icon fas fa-ticket-alt blue"></i>
+                   <p>
+                     My Tickets
+                   </p>
+                 </router-link>
+               </li>
+
+               <li class="nav-item">
+                 <router-link to="/clients" class="nav-link">
+                   <i class="nav-icon fas fa-user-tie blue"></i>
+                   <p>
+                     Clients
+                   </p>
+                 </router-link>
+               </li>
+
+               <li class="nav-item">
+                 <router-link to="/libraries" class="nav-link">
+                   <i class="nav-icon fas fa-book blue"></i>
+                   <p>
+                     Libraries
+                   </p>
+                 </router-link>
+               </li>
+
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog blue"></i>
@@ -91,17 +155,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Users</p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link to="/developer" class="nav-link">
+                  <i class="nav-icon fas fa-cogs blue"></i>
+                  <p>
+                    Developer
+                  </p>
+                </router-link>
+              </li>
             </ul>
           </li>
 
-          <li class="nav-item">
-            <router-link to="/developer" class="nav-link">
-              <i class="nav-icon fas fa-cogs blue"></i>
-              <p>
-                Developer
-              </p>
-            </router-link>
-          </li>
+
 
 
           <li class="nav-item">
@@ -171,10 +236,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      Shockwave Media Pty Ltd
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 <a href="http://#">Ezy CRM</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
