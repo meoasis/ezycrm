@@ -8,7 +8,7 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#" class="ad-click-event">
-                                        <img width="150" src="/img/profile.png" alt="EZ-Avatar" class="media-object"/>
+                                        <img width="150" :src="getProfilePhoto()" alt="EZ-Avatar" class="media-object"/>
                                     </a>
                                 </div>
                                 <div class="media-body ml-3">
@@ -66,13 +66,7 @@
                           <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email">
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="inputName2" class="col-sm-2 control-label">Name</label>
 
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                        </div>
-                      </div>
                       <div class="form-group">
                         <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
@@ -81,25 +75,30 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                                   <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
+                                   <div class="col-sm-12">
+                                       <input type="file" @change="updateProfile" name="photo" class="form-input">
+                                   </div>
 
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                        </div>
                       </div>
                       <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                            </label>
-                          </div>
-                        </div>
+                                    <label for="password" class="col-sm-12 control-label">Passport (leave empty if not changing)</label>
+
+                                    <div class="col-sm-12">
+                                    <input type="password"
+                                        v-model="form.password"
+                                        class="form-control"
+                                        id="password"
+                                        placeholder="Passport"
+                                        :class="{ 'is-invalid': form.errors.has('password') }"
+                                    >
+                                     <has-error :form="form" field="password"></has-error>
+                                    </div>
                       </div>
                       <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
-                        </div>
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                    <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
+                                    </div>
                       </div>
                     </form>
                   </div>
@@ -121,25 +120,61 @@
 <script>
     export default {
         data(){
-            return{
-            form: new Form({
-                id: '',
-                name: '',
-                email: '',
-                password: '',
-                type: '',
-                bio: '',
-                photo: ''
-            })
+            return {
+                 form: new Form({
+                    id:'',
+                    name : '',
+                    email: '',
+                    password: '',
+                    type: '',
+                    bio: '',
+                    photo: ''
+                })
             }
         },
         mounted() {
             console.log('Component mounted.')
         },
-
-        created(){
-        axios.get("api/profile")
-      .then(({ data }) => (this.form.fill(data)));
+        methods:{
+            getProfilePhoto(){
+                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
+                return photo;
+            },
+            updateInfo(){
+                this.$Progress.start();
+                if(this.form.password == ''){
+                    this.form.password = undefined;
+                }
+                this.form.put('api/profile')
+                .then(()=>{
+                     Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                })
+                .catch(() => {
+                    this.$Progress.fail();
+                });
+            },
+            updateProfile(e){
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                let limit = 1024 * 1024 * 2;
+                if(file['size'] > limit){
+                    swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'You are uploading a large file',
+                    })
+                    return false;
+                }
+                reader.onloadend = (file) => {
+                    this.form.photo = reader.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        },
+        created() {
+            axios.get("api/profile")
+            .then(({ data }) => (this.form.fill(data)));
         }
     }
 </script>
